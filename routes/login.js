@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
               secure: process.env.NODE_ENV !== "development",
               sameSite: "strict",
               maxAge: 7200,
-              path: "https://crud-stack.vercel.app",
+              path: "/",
             })
           );
           if(setMyCookie){
