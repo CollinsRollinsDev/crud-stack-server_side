@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
             id: user.id,
             emailAddress: user.emailAddress.toLowerCase(),
             username: user.username.toLowerCase(),
-            createdAt: user.createdAt,
+            // createdAt: user.createdAt,
           };
 
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
@@ -66,7 +66,7 @@ router.post("/", async (req, res) => {
             cookie.serialize("authplay_auth", token, {
               httpOnly: false,
               // not a very serious app to set secure=true to only production
-              secure: process.env.NODE_ENV == "development",
+              secure: process.env.NODE_ENV === "development",
               sameSite: "None",
               maxAge: 7200,
               path: "/",
