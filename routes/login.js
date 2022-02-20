@@ -53,8 +53,8 @@ router.post("/", async (req, res) => {
         if (!err && result) {
           const userData = {
             id: user.id,
-            emailAddress: user.emailAddress.toLowerCase(),
-            username: user.username.toLowerCase(),
+           // emailAddress: user.emailAddress.toLowerCase(),
+           // username: user.username.toLowerCase(),
             // createdAt: user.createdAt,
           };
 
@@ -66,7 +66,7 @@ router.post("/", async (req, res) => {
             cookie.serialize("authplay_auth", token, {
               httpOnly: false,
               // not a very serious app to set secure=true to only production
-              secure: process.env.NODE_ENV === "development",
+              secure: process.env.NODE_ENV !== "development",
               sameSite: "none",
               maxAge: 3600,
               path: "/",
