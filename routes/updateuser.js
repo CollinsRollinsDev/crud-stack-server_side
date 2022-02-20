@@ -9,22 +9,20 @@ const { sign } = require("jsonwebtoken");
 const cookie = require("cookie");
 
 router.patch("/", async (req, res) => {
-
-  const {emailAddress, username, password, id} = req.body;
-
+  const { emailAddress, username, password, id } = req.body;
   // find unique user by email
   const user = await User.findOne({
-    _id:id
+    _id: id,
   });
 
-  if(!user){
+  if (!user) {
     return res.status(401).json({
       success: false,
       message: `We could not find anyone with this credentials`,
     });
   }
 
-  if(emailAddress == user.emailAddress && username == user.username){
+  if (emailAddress == user.emailAddress && username == user.username) {
     return res.status(401).json({
       success: false,
       message: `Sorry, you should change some details to update your profile.`,
@@ -33,18 +31,17 @@ router.patch("/", async (req, res) => {
 
   compare(req.body.password, user.password, async function (err, result) {
     if (!err && result) {
-
-      if(username){
+      if (username) {
         user.username = username;
       }
-      if(emailAddress){
-        user.emailAddress = emailAddress
+      if (emailAddress) {
+        user.emailAddress = emailAddress;
       }
 
       const updated = await user.save();
 
       const userData = {
-        id:user.id,
+        id: user.id,
         emailAddress: user.emailAddress.toLowerCase(),
         username: user.username.toLowerCase(),
         createdAt: user.createdAt,
@@ -75,9 +72,6 @@ router.patch("/", async (req, res) => {
       });
     }
   });
-
-
-
-})
+});
 
 module.exports = router;

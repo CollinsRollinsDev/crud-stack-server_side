@@ -7,26 +7,15 @@ const hash = bcrypt.hash;
 const compare = bcrypt.compare;
 const { sign } = require("jsonwebtoken");
 const cookie = require("cookie");
-const cookieParser = require('cookie-parser');
-let app = express(); // module for parsing cookies
+const cookieParser = require("cookie-parser");
+let app = express();
 app.use(cookieParser());
 let proceed;
 
 router.post("/", async (req, res) => {
-  // res.send('working properly')
   const method = req.method;
   const { emailAddress, username } = req.body;
   const { queryP } = req.query;
-
-  //    // check if email or username
-  //    const validateEmail = async(emailAddress) => {
-  //    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  //    if (emailAddress.match(regexEmail)) {
-  //      return true;
-  //    } else {
-  //      return false;
-  //    }
-  //  }
 
   // based on outcome, query db vis email or username
   let user;
@@ -36,7 +25,7 @@ router.post("/", async (req, res) => {
     });
   } else {
     user = await User.findOne({
-      username:emailAddress,
+      username: emailAddress,
     });
   }
 
@@ -54,14 +43,16 @@ router.post("/", async (req, res) => {
         ? (proceed = true)
         : (proceed = false);
     } else {
-      (await user.username) === emailAddress ? (proceed = true) : (proceed = false);
+      (await user.username) === emailAddress
+        ? (proceed = true)
+        : (proceed = false);
     }
     if (proceed) {
       // Check if password matches password on the database using bcrypt and log user in.
       compare(req.body.password, user.password, async function (err, result) {
         if (!err && result) {
           const userData = {
-            id:user.id,
+            id: user.id,
             emailAddress: user.emailAddress.toLowerCase(),
             username: user.username.toLowerCase(),
             createdAt: user.createdAt,

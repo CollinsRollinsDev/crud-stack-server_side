@@ -9,7 +9,6 @@ const { sign } = require("jsonwebtoken");
 const cookie = require("cookie");
 
 router.get("/", async (req, res) => {
-
   try {
     res.setHeader(
       "Set-Cookie",
@@ -22,14 +21,12 @@ router.get("/", async (req, res) => {
       success: true,
       message: `you are logged out`,
     });
-    // res.redirect('/');
   } catch (error) {
     return res.status(200).json({
       success: false,
       message: `Sorry, something went wrong. Try again`,
     });
   }
-
-})
+});
 
 module.exports = router;
