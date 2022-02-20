@@ -31,6 +31,10 @@ index.use("/updateuser", updateuser);
 index.use("/changepassword", changepassword);
 index.use("/logout", logout);
 
+res.header("Access-Control-Allow-Headers","*");
+res.header('Access-Control-Allow-Credentials', true);
+res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+
 // Connecting MongoDb Atlas to Application
 mongoose.connect(uri);
 
