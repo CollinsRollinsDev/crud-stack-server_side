@@ -61,7 +61,7 @@ router.post("/", async (req, res) => {
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "2h",
           });
-          res.setHeader(
+         const setMyCookie = await res.setHeader(
             "Set-Cookie",
             cookie.serialize("authplay_auth", token, {
               httpOnly: false,
@@ -71,11 +71,13 @@ router.post("/", async (req, res) => {
               path: "/",
             })
           );
-
-          return res.status(200).json({
-            success: true,
-            message: "Welcome to Auth Play",
-          });
+          if(setMyCookie){
+            return res.status(200).json({
+              success: true,
+              message: "Welcome to Auth Play",
+            });
+          }
+       
         } else {
           return res.status(401).json({
             success: false,
