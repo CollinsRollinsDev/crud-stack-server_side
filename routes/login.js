@@ -58,6 +58,7 @@ router.post("/", async (req, res) => {
             // createdAt: user.createdAt,
           };
 
+/*
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "1h",
           });
@@ -81,7 +82,12 @@ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
               message: "Welcome to Auth Play",
             });
           } 
-
+*/
+res.cookie('authplay_auth', userData);
+return res.status(200).json({
+              success: true,
+              message: "Welcome to Auth Play",
+            });
 	
         } else {
           return res.status(401).json({
