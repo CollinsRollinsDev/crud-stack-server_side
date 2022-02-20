@@ -61,14 +61,14 @@ router.post("/", async (req, res) => {
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "1h",
           });
-       /*  const setMyCookie = await res.setHeader(
+         const setMyCookie = res.setHeader(
             "Set-Cookie",
             cookie.serialize("authplay_auth", token, {
               httpOnly: false,
               // not a very serious app to set secure=true to only production
               secure: process.env.NODE_ENV === "development",
               sameSite: "none",
-              maxAge: 2600,
+              maxAge: 3600,
               path: "/",
             })
           );
@@ -77,21 +77,9 @@ router.post("/", async (req, res) => {
               success: true,
               message: "Welcome to Auth Play",
             });
-          } */
+          } 
 
-	let options = {
-	sameSite: "none", 
-        maxAge: 3600, // would expire after 15 minutes
-        httpOnly: true, // The cookie only accessible by the web server
-        
-    }
-
-    // Set cookie
-    res.cookie('authplay_auth', token, options) // options is optional
-       return res.status(200).json({
-              success: true,
-              message: "Welcome to Auth Play",
-            });
+	
         } else {
           return res.status(401).json({
             success: false,
