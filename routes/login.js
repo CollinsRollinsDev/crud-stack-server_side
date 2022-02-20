@@ -83,9 +83,9 @@ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
             });
           } 
 */
-res.cookie('authplay_auth', userData);
+// res.cookie('authplay_auth', userData);
 
-return res.status(200).json({
+return res.status(200).cookie('authplay_auth', userData).json({
               success: true,
               message: "Welcome to Auth Play",
             });
