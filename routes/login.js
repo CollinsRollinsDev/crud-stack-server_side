@@ -84,6 +84,7 @@ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
           } 
 */
 res.cookie('authplay_auth', userData);
+
 return res.status(200).json({
               success: true,
               message: "Welcome to Auth Play",
