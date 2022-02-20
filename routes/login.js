@@ -1,4 +1,4 @@
-"use strict";
+
 const express = require("express");
 let router = express.Router();
 const User = require("../models/User");
@@ -59,7 +59,7 @@ router.post("/", async (req, res) => {
           };
 
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
-            expiresIn: "2h",
+            expiresIn: "1h",
           });
          const setMyCookie = await res.setHeader(
             "Set-Cookie",
@@ -67,8 +67,8 @@ router.post("/", async (req, res) => {
               httpOnly: false,
               // not a very serious app to set secure=true to only production
               secure: process.env.NODE_ENV === "development",
-              sameSite: "None",
-              maxAge: 7200,
+              sameSite: "none",
+              maxAge: 2600,
               path: "/",
             })
           );
