@@ -7,12 +7,10 @@ index.use(express.json());
 const uri = process.env.MONGODB_CONNECTION_URI;
 const cors = require("cors")
 let corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000, https://crud-stack.vercel.app',
   optionsSuccessStatus: 200, // For legacy browser support,
   credentials: true
 }
-
-
 index.use(cors(corsOptions));
 
 
