@@ -69,7 +69,7 @@ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
             cookie.serialize("authplay_auth", token, {
               httpOnly: false,
               secure: process.env.NODE_ENV !== "development",
-              sameSite: "strict",
+              sameSite: "none",
               maxAge: 7200,
               path: "/",
             })
