@@ -65,7 +65,8 @@ router.post("/", async (req, res) => {
             "Set-Cookie",
             cookie.serialize("authplay_auth", token, {
               httpOnly: false,
-              secure: process.env.NODE_ENV !== "development",
+              // secure: process.env.NODE_ENV !== "development",
+              secure: false,
               sameSite: "None",
               maxAge: 7200,
               path: "/",
