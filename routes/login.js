@@ -64,33 +64,33 @@ router.post("/", async (req, res) => {
           });
 res.header('Access-Control-Allow-Credentials', true);
 res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        //  const setMyCookie = res.setHeader(
-        //     "Set-Cookie",
-        //     cookie.serialize("authplay_auth", token, {
-        //       httpOnly: false,
-        //       // not a very serious app to set secure=true to only production
-        //       secure: false,
-        //       sameSite: "None",
-        //       maxAge: 3600,
-        //       path: "/",
-        //     })
-        //   );
-        let options = {
-                httpOnly: false,
-                // not a very serious app to set secure=true to only production
-                secure: false,
-                // maxAge: 3600,
-                sameSite:'none',
-                path: "/",
-        }
+         const setMyCookie = res.setHeader(
+            "Set-Cookie",
+            cookie.serialize("authplay_auth", token, {
+              httpOnly: false,
+              // not a very serious app to set secure=true to only production
+              secure: false,
+              // sameSite: "none",
+              maxAge: 36000000000,
+              path: "/",
+            })
+          );
+        // let options = {
+        //         httpOnly: false,
+        //         // not a very serious app to set secure=true to only production
+        //         secure: false,
+        //         // maxAge: 3600,
+        //         sameSite:'none',
+        //         path: "/",
+        // }
 
-          res.cookie('authplay_auth', token, options)
-          // if(setMyCookie){
+        //   res.cookie('authplay_auth', token, options)
+          if(setMyCookie){
             return res.status(200).json({
               success: true,
               message: "Welcome to Auth Play",
             });
-          // } 
+          } 
 
 	
         } else {
