@@ -69,8 +69,8 @@ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
             cookie.serialize("authplay_auth", token, {
               httpOnly: false,
               // not a very serious app to set secure=true to only production
-              secure: false,
-              // sameSite: "none",
+              secure: process.env.NODE_ENV !== 'development',
+              sameSite: "none",
               maxAge: 36000000000,
               path: "/",
             })
