@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 index.use(express.urlencoded({ extended: true }));
 const dotenv = require("dotenv").config();
 index.use(express.json());
+
 const uri = process.env.MONGODB_CONNECTION_URI;
 const cors = require("cors");
 let corsOptions = {
-  origin: ["https://crud-stack.vercel.app", "http://localhost:3000"],
+  origin: ["https://crud-stack.vercel.app", "http://localhost:3000", "http://127.0.0.1:5500"],
   optionsSuccessStatus: 200, // For legacy browser support,
   credentials: true,
 };
@@ -51,7 +52,7 @@ const PORT = process.env.PORT || 8088;
 
 // Routes
 index.get("/", async (req, res) => {
-  res.send("Hello, Welcome and all fine and good!");
+  res.send("Hello, all fine and good!");
 });
 
 //   index Listening to Port Requests
