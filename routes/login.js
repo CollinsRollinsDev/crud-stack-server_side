@@ -62,15 +62,14 @@ router.post("/", async (req, res) => {
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "1h",
           });
-res.header("Access-Control-Allow-Headers","*");
-res.header('Access-Control-Allow-Credentials', true);
-res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+          res.header('Access-Control-Allow-Credentials', true);
+          res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
          const setMyCookie = res.setHeader(
             "Set-Cookie",
             cookie.serialize("authplay_auth", token, {
               httpOnly: false,
               // not a very serious app to set secure=true to only production
-              secure: process.env.NODE_ENV !== "development",
+              secure: false,
               sameSite: "None",
               maxAge: 3600,
               path: "/",
