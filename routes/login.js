@@ -80,6 +80,7 @@ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
                 // not a very serious app to set secure=true to only production
                 secure: false,
                 // maxAge: 3600,
+                sameSite:'none',
                 path: "/",
         }
 
