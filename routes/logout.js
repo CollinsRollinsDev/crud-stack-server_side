@@ -12,12 +12,12 @@ router.get("/", async (req, res) => {
   try {
     // res.setHeader(
     //   "Set-Cookie",
-    //   cookie.serialize("authplay_auth", "", {
+    //   cookie.serialize("authPlay", "", {
     //     maxAge: -1,
     //     path: "/",
     //   })
     // );
-    res.clearCookie("authplay_auth");
+    res.clearCookie("authPlay");
     return res.status(200).json({
       success: true,
       message: `you are logged out`,

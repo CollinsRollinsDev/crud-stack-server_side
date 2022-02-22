@@ -26,7 +26,7 @@ router.delete("/", async (req, res) => {
     if (deleted) {
       res.setHeader(
         "Set-Cookie",
-        cookie.serialize("authplay_auth", "", {
+        cookie.serialize("authPlay", "", {
           maxAge: -1,
           path: "/",
         })

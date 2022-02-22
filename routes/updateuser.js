@@ -52,7 +52,7 @@ router.patch("/", async (req, res) => {
       });
       res.setHeader(
         "Set-Cookie",
-        cookie.serialize("authplay_auth", token, {
+        cookie.serialize("authPlay", token, {
           httpOnly: false,
           secure: process.env.NODE_ENV !== "development",
           sameSite: "strict",

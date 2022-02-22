@@ -1,5 +1,6 @@
 
 const express = require("express");
+// const session = require("express-session")
 let router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
@@ -12,7 +13,9 @@ let app = express();
 app.use(cookieParser());
 let proceed;
 
+
 router.post("/", async (req, res) => {
+  // req.session.isAuth = true
   const method = req.method;
   const { emailAddress, username } = req.body;
   const { queryP } = req.query;
@@ -62,36 +65,33 @@ router.post("/", async (req, res) => {
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "1h",
           });
-         const setMyCookie = res.setHeader(
-            "Set-Cookie",
-            cookie.serialize("authplay_auth", token, {
-              httpOnly: false,
-              // not a very serious app to set secure=true to only production
-              secure: process.env.NODE_ENV !== 'development',
-              sameSite: "none",
-              maxAge: 36000000000,
-              path: "/",
-            })
-          );
-    //     let options = {
-    //             httpOnly: false,
-    //             // not a very serious app to set secure=true to only production
-    //             secure: true,
-    //             maxAge: 300000000600,
-    //             sameSite:'none',
-    //             path: "/",
-    //     }
-    //     console.log("i am read")
-    //     res.clearCookie("authplay_auth");
-    //       res.cookie('authplay_auth', token, {
-    //         httpOnly: false,
-    //         // not a very serious app to set secure=true to only production
-    //         secure: true,
-    //         maxAge: 300000000600,
-    //         sameSite:'none',
-    //         path: "/",
-    // })
-          res.cookie('authplay_auth', token)
+        //  const setMyCookie = res.setHeader(
+        //     "Set-Cookie",
+        //     cookie.serialize("authPlay", token, {
+        //       httpOnly: false,
+        //       // not a very serious app to set secure=true to only production
+        //       secure: process.env.NODE_ENV !== 'development',
+        //       sameSite: false,
+        //       maxAge: 36000000000,
+        //       path: "/",
+        //     })
+        //   );
+        console.log(req.cookies, "as old cookies")
+        let options = {
+                httpOnly: true,
+                // not a very serious app to set secure=true to only production
+                secure: true,
+                maxAge: 300000000600,
+                sameSite:'none',
+                path: "/",
+                // expires: 1 / 24
+        }
+        console.log("i am read")
+        // res.clearCookie("authPlay");
+          res.cookie('authPlay', token,options)
+        console.log(req.cookies, "as old later cookies")
+
+          // res.cookie('authPlay', token)
           // if(setMyCookie){
             return res.status(200).json({
               success: true,
