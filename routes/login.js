@@ -89,6 +89,7 @@ router.post("/", async (req, res) => {
                 secure: process.env.NODE_ENV !== 'development' ? true : false,
                 // maxAge: 300000000600,
                 sameSite:'none',
+                domain:'https://frontend-crud.netlify.app'
                 // path: "/",
                 // expires: 1 / 24
         }
