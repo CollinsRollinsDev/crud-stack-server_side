@@ -100,10 +100,11 @@ router.post("/", async (req, res) => {
 
           // res.cookie('authPlay', token)
           // if(setMyCookie){
-            return res.status(200).json({
+            res.status(200).json({
               success: true,
               message: "Welcome to Auth Play",
             });
+            res.end()
           // } 
 
 	
