@@ -10,13 +10,14 @@ const cookie = require("cookie");
 
 router.get("/", async (req, res) => {
   try {
-    res.setHeader(
-      "Set-Cookie",
-      cookie.serialize("authplay_auth", "", {
-        maxAge: -1,
-        path: "/",
-      })
-    );
+    // res.setHeader(
+    //   "Set-Cookie",
+    //   cookie.serialize("authplay_auth", "", {
+    //     maxAge: -1,
+    //     path: "/",
+    //   })
+    // );
+    res.clearCookie("authplay_auth");
     return res.status(200).json({
       success: true,
       message: `you are logged out`,
