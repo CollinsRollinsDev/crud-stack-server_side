@@ -62,8 +62,6 @@ router.post("/", async (req, res) => {
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "1h",
           });
-res.header('Access-Control-Allow-Credentials', true);
-res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         //  const setMyCookie = res.setHeader(
           //   "Set-Cookie",
           //   cookie.serialize("authplay_auth", token, {
@@ -75,16 +73,16 @@ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
           //     path: "/",
           //   })
           // );
-        // let options = {
-        //         httpOnly: false,
-        //         // not a very serious app to set secure=true to only production
-        //         secure: false,
-        //         // maxAge: 3600,
-        //         sameSite:'none',
-        //         path: "/",
-        // }
+        let options = {
+                httpOnly: false,
+                // not a very serious app to set secure=true to only production
+                secure: false,
+                // maxAge: 3600,
+                sameSite:'none',
+                path: "/",
+        }
 
-        //   res.cookie('authplay_auth', token, options)
+          // res.cookie('authplay_auth', token, options)
           res.cookie('authplay_auth', token)
           // if(setMyCookie){
             return res.status(200).json({
