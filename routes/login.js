@@ -86,10 +86,10 @@ router.post("/", async (req, res) => {
         let options = {
                 httpOnly: true,
                 // not a very serious app to set secure=true to only production
-                secure: true,
-                maxAge: 300000000600,
+                secure: process.env.NODE_ENV !== 'development' ? true : false,
+                // maxAge: 300000000600,
                 sameSite:'none',
-                path: "/",
+                // path: "/",
                 // expires: 1 / 24
         }
         console.log("i am read")
