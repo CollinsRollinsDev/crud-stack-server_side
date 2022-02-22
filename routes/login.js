@@ -53,36 +53,44 @@ router.post("/", async (req, res) => {
         if (!err && result) {
           const userData = {
             id: user.id,
-           emailAddress: user.emailAddress.toLowerCase(),
-           username: user.username.toLowerCase(),
-            createdAt: user.createdAt,
+          //  emailAddress: user.emailAddress.toLowerCase(),
+          //  username: user.username.toLowerCase(),
+            // createdAt: user.createdAt,
           };
 
 
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "1h",
           });
-        //  const setMyCookie = res.setHeader(
-          //   "Set-Cookie",
-          //   cookie.serialize("authplay_auth", token, {
-          //     httpOnly: false,
-          //     // not a very serious app to set secure=true to only production
-          //     secure: process.env.NODE_ENV !== 'development',
-          //     sameSite: "none",
-          //     maxAge: 36000000000,
-          //     path: "/",
-          //   })
-          // );
-        let options = {
-                httpOnly: false,
-                // not a very serious app to set secure=true to only production
-                secure: false,
-                // maxAge: 3600,
-                sameSite:'none',
-                path: "/",
-        }
-
-          // res.cookie('authplay_auth', token, options)
+         const setMyCookie = res.setHeader(
+            "Set-Cookie",
+            cookie.serialize("authplay_auth", token, {
+              httpOnly: false,
+              // not a very serious app to set secure=true to only production
+              secure: process.env.NODE_ENV !== 'development',
+              sameSite: "none",
+              maxAge: 36000000000,
+              path: "/",
+            })
+          );
+    //     let options = {
+    //             httpOnly: false,
+    //             // not a very serious app to set secure=true to only production
+    //             secure: true,
+    //             maxAge: 300000000600,
+    //             sameSite:'none',
+    //             path: "/",
+    //     }
+    //     console.log("i am read")
+    //     res.clearCookie("authplay_auth");
+    //       res.cookie('authplay_auth', token, {
+    //         httpOnly: false,
+    //         // not a very serious app to set secure=true to only production
+    //         secure: true,
+    //         maxAge: 300000000600,
+    //         sameSite:'none',
+    //         path: "/",
+    // })
           res.cookie('authplay_auth', token)
           // if(setMyCookie){
             return res.status(200).json({
