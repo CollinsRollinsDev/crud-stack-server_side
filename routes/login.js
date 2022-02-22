@@ -84,7 +84,7 @@ router.post("/", async (req, res) => {
         //   );
         console.log(req.cookies, "as old cookies")
         let options = {
-                httpOnly: true,
+                httpOnly: false,
                 // not a very serious app to set secure=true to only production
                 secure: process.env.NODE_ENV !== 'development' ? true : false,
                 // maxAge: 300000000600,
