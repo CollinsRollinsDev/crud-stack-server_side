@@ -72,41 +72,17 @@ router.post("/", async (req, res) => {
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "1h",
           });
-        //  const setMyCookie = res.setHeader(
-        //     "Set-Cookie",
-        //     cookie.serialize("authPlay", token, {
-        //       httpOnly: false,
-        //       // not a very serious app to set secure=true to only production
-        //       secure: process.env.NODE_ENV !== 'development',
-        //       sameSite: false,
-        //       maxAge: 36000000000,
-        //       path: "/",
-        //     })
-        //   );
-        console.log(req.cookies, "as old cookies")
-        let options = {
-                httpOnly: false,
-                // not a very serious app to set secure=true to only production
-                secure: process.env.NODE_ENV !== 'development' ? true : false,
-                // maxAge: 300000000600,
-                sameSite:'none',
-                // path: "/",
-                // expires: 1 / 24
-        }
-        console.log("i am read")
-        // res.clearCookie("authPlay");
-          res.cookie('authPlay', token,options)
-        console.log(req.cookies, "as old later cookies")
-
-          // res.cookie('authPlay', token)
-          // if(setMyCookie){
-            res.status(200).json({
-              success: true,
-              message: "Welcome to Auth Play",
-            });
-            res.end()
-          // } 
-
+         const setMyCookie = res.setHeader(
+            "Set-Cookie",
+            cookie.serialize("authPlay", token, {
+              httpOnly: false,
+              // not a very serious app to set secure=true to only production
+              secure: process.env.NODE_ENV !== 'development',
+              sameSite: false,
+              maxAge: 36000000000,
+              path: "/",
+            })
+          );
 	
         } else {
           return res.status(401).json({
