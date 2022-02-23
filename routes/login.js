@@ -7,14 +7,14 @@ const bcrypt = require("bcrypt");
 const hash = bcrypt.hash;
 const compare = bcrypt.compare;
 const { sign } = require("jsonwebtoken");
-const cookie = require("cookie");
+// const cookie = require("cookie");
 const cookieParser = require("cookie-parser");
 let app = express();
 app.use(cookieParser());
 let proceed;
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
-  // res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
   next();
@@ -73,7 +73,7 @@ router.post("/", async (req, res) => {
             expiresIn: "1h",
           });
           if(token){
-            res.cookie('authPlay', token, {
+            res.cookie('token', token, {
               sameSite:'none',
               httpOnly:true,
               secure:true
