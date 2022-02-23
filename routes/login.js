@@ -7,19 +7,22 @@ const bcrypt = require("bcrypt");
 const hash = bcrypt.hash;
 const compare = bcrypt.compare;
 const { sign } = require("jsonwebtoken");
+<<<<<<< HEAD
 // const cookie = require("cookie");
 const cookieParser = require("cookie-parser");
 let app = express();
 app.use(cookieParser());
+=======
+>>>>>>> 791e5c97b5b11a267b0bcdaf73c611f17e0e0276
 let proceed;
-app.use(function(req, res, next) {
+/* app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Origin', req.headers.origin);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
   next();
 });
-
+*/
 
 router.post("/", async (req, res) => {
   // req.session.isAuth = true
@@ -73,16 +76,27 @@ router.post("/", async (req, res) => {
             expiresIn: "1h",
           });
           if(token){
+<<<<<<< HEAD
             res.cookie('token', token, {
               sameSite:'none',
               httpOnly:true,
               secure:true
             } )
+=======
+            res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .send();
+>>>>>>> 791e5c97b5b11a267b0bcdaf73c611f17e0e0276
           }
           res.status(200).json({
             success: true,
             message: `Welcome to AuthPlay.`,
           })
+res.end();
 	
         } else {
           return res.status(401).json({
