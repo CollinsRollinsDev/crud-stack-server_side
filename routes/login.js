@@ -72,6 +72,12 @@ router.post("/", async (req, res) => {
           let token = sign(userData, process.env.JWT_SIGN_KEY, {
             expiresIn: "1h",
           });
+          if(token){
+            res.cookie('authPlay', token, {
+              sameSite:'none',
+              httpOnly:true
+            } )
+          }
           res.status(200).json({
             success: true,
             message: `Welcome to AuthPlay.`,
