@@ -7,7 +7,6 @@ const bcrypt = require("bcrypt");
 const hash = bcrypt.hash;
 const compare = bcrypt.compare;
 const { sign } = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
 let proceed;
 /* app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
