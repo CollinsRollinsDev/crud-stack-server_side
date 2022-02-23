@@ -75,7 +75,8 @@ router.post("/", async (req, res) => {
           if(token){
             res.cookie('authPlay', token, {
               sameSite:'none',
-              httpOnly:true
+              httpOnly:true,
+              secure:true
             } )
           }
           res.status(200).json({
